@@ -30,7 +30,8 @@
                         </div>
                     </div>
                     {{ csrf_field() }}
-                    
+                    <drop-image v-bind:name="'name'" v-bind:path="'{{ old('name') }}'"
+                            v-bind:url="'/api/admin/diary/uploadImage'" v-bind:dir="'upload_images/diary/{{ auth()->user()->id }}/'"></drop-image>
                     <input type="submit" class="btn btn-primary" value="更新">
                 </form>
             </div>

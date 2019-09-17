@@ -10,13 +10,9 @@
         <title>@yield('title')</title>
         
         <!-- Scripts -->
-        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
-        <script>
-        $(function() {
-            $( "#datepicker" ).datepicker({ dateFormat: "yy-mm-dd" });
-        });
-        </script>
+        <script src="{{ secure_asset('js/app.js') }}" defer></script>
+        <script src="//cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+        <script>tinymce.init({selector:'textarea'});</script>
         <!-- Fonts -->
         <link rel="dns-prefetch" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">

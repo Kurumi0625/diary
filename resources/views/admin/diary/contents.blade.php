@@ -5,7 +5,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <a href="{{ action('Admin\DiaryController@show') }}" role="button" class="btn btn-primary">トップに戻る</a>
+                <a href="{{ action('Admin\DiaryController@index') }}" role="button" class="btn btn-primary">トップに戻る</a>
             </div>
         </div>
         <div class="row">

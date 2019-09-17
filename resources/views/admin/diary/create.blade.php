@@ -16,7 +16,7 @@
                     @endif
                     <div class="form-group row">
                         <div class="col-md-5">
-                            <input id="datepicker" type="text" class="form-control" name="date" value="{{ old('date') }}" placeholder="日付を選択してください">
+                            <input type="date" class="form-control" name="date" value="{{ old('date') }}" placeholder="日付を選択してください">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -29,12 +29,8 @@
                             <textarea class="form-control" name="body" rows="20" placeholder="本文を入力してください">{{ old('body') }}</textarea>
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <div class="col-md-12">
-                            <input type="file" class="form-control-file" name="image">
-                        </div>
-                    </div>
                     {{ csrf_field() }}
+                    
                     <input type="submit" class="btn btn-primary" value="更新">
                 </form>
             </div>

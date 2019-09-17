@@ -12,4 +12,9 @@ class Diary extends Model
         'title' => 'required',
         'body' => 'required',
     );
+    
+    public function images()
+    {
+        return $this->hasMany(Image::class);
+    }
 }

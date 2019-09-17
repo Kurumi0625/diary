@@ -5,7 +5,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4">
-                <a href="{{ action('Admin\DiaryController@add') }}" role="button" class="btn btn-primary">日記を書く</a>
+                <a href="{{ action('Admin\DiaryController@meEdit') }}">{{ Auth::user()->name }}の日記</a>
             </div>
             <div class="col-md-8">
                 <form action="{{ action('Admin\DiaryController@index') }}" method="get">
@@ -23,37 +23,35 @@
         </div>
         <div class="row">
             <div class="col-md-2">
-                <label>※カレンダー入れる※</label>
+                <a href="{{ action('Admin\DiaryController@add') }}" role="button" class="btn btn-primary">日記を書く</a>
+                <label>※カレンダーを入れる</label>
             </div>
             <div class="list-diary col-md-10 mx-auto">
                 <div class="row">
                     <table class="table">
-                        <thead>
-                            <tr>
-                                <th width="10%">日付</th>
-                                <th width="20%">タイトル</th>
-                                <th width="50%">本文</th>
-                                <th width="10%">操作</th>
-                            </tr>
-                        </thead>
                         <tbody>
                             @foreach($posts as $diary)
                                 <tr>
-                                    <th>{{ $diary->date }}</th>
-                                    <td>{{ str_limit($diary->title, 15) }}</td>
-                                    <td>{{ str_limit($diary->body, 30) }}</td>
-                                    <td>
+                                    <td width="20%">{{ $diary->date }}</td>
+                                    <td width="70%">
+                                        <div>
+                                            <a href="{{ action('Admin\DiaryController@show') }}">{{ str_limit($diary->title, 50) }}</a>
+                                            <br><a>{{ str_limit($diary->body, 80) }}</a>
+                                        </div>
+                                    </td>
+                                    <td width="10%">
                                         <div>
                                             <a href="{{ action('Admin\DiaryController@edit', ['id' => $diary->id]) }}">編集</a>
                                         </div>
                                         <div>
-                                            <a href="{{ action('Admin\DiaryController@delete', ['id' => $diary->id]) }}">削除</a>
+                                            <a href="{{ action('Admin\DiaryController@delete', ['id' => $diary->id]) }}" onclick='return confirm("削除してもよろしいですか？");'/>削除</a>
                                         </div>
                                     </td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
+                    {{ $posts->links() }}
                 </div>
             </div>
         </div>

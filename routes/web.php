@@ -26,6 +26,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
     Route::get('diary/edit', 'Admin\DiaryController@edit');
     Route::post('diary/edit', 'Admin\DiaryController@update');
     Route::get('diary/delete', 'Admin\DiaryController@delete');
-    Route::get('diary/contents', 'Admin\DiaryController@show');
+    Route::get('diary/contents/{id}', 'Admin\DiaryController@show')->name('diary/contents');
     Route::get('diary/me', 'Admin\DiaryController@meEdit');
 });

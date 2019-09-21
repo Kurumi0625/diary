@@ -5,6 +5,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4">
+                
                 <a href="{{ action('Admin\DiaryController@meEdit') }}">{{ Auth::user()->name }}の日記</a>
             </div>
             <div class="col-md-8">
@@ -25,6 +26,7 @@
             <div class="col-md-2">
                 <a href="{{ action('Admin\DiaryController@add') }}" role="button" class="btn btn-primary">日記を書く</a>
                 <label>※カレンダーを入れる</label>
+                
             </div>
             <div class="list-diary col-md-10 mx-auto">
                 <div class="row">
@@ -35,7 +37,7 @@
                                     <td width="20%">{{ $diary->date }}</td>
                                     <td width="70%">
                                         <div>
-                                            <a href="{{ action('Admin\DiaryController@show') }}">{{ str_limit($diary->title, 50) }}</a>
+                                            <a href="{{ action('Admin\DiaryController@show', ['id' => $diary->id]) }}">{{ str_limit($diary->title, 50) }}</a>
                                             <br><a>{{ str_limit($diary->body, 80) }}</a>
                                         </div>
                                     </td>

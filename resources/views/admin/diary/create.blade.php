@@ -4,7 +4,10 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-8 mx-auto">
+            <div class="col-md-1 mx-auto">
+                <a href="{{ action('Admin\DiaryController@index') }}" role="button" class="btn btn-primary">戻る</a>
+            </div>
+            <div class="col-md-11 mx-auto">
                 <form action="{{ action('Admin\DiaryController@create') }}" method="post" enctype="multipart/form-data">
 
                     @if (count($errors) > 0)
@@ -30,8 +33,8 @@
                         </div>
                     </div>
                     {{ csrf_field() }}
-                    <drop-image v-bind:name="'name'" v-bind:path="'{{ old('name') }}'"
-                            v-bind:url="'/api/admin/diary/uploadImage'" v-bind:dir="'upload_images/diary/{{ auth()->user()->id }}/'"></drop-image>
+                    <drop-image v-bind:name="'image_path'" v-bind:path="'{{ old('image_path') }}'"
+                            v-bind:url="'/api/admin/diary/uploadImage'" v-bind:dir="'upload_images/diary/{{ auth()->user()->id }}'"></drop-image>
                     <input type="submit" class="btn btn-primary" value="更新">
                 </form>
             </div>

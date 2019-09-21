@@ -1781,7 +1781,7 @@ __webpack_require__.r(__webpack_exports__);
       var formData = new FormData();
       formData.append('img', file);
       formData.append('dir', this.dir);
-      var url = 'http://' + this.host + this.url;
+      var url = this.url;
       var self = this.$data;
       fetch(url, {
         method: 'POST',

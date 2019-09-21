@@ -77,7 +77,7 @@
                 let formData   = new FormData();
                 formData.append('img', file);
                 formData.append('dir', this.dir);
-                let url = 'http://' + this.host + this.url;
+                let url = this.url;
                 let self = this.$data;
 
                 fetch(url, {

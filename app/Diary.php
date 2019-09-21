@@ -12,6 +12,7 @@ class Diary extends Model
         'title' => 'required',
         'body' => 'required',
     );
+    protected $fillable = ['user_id', 'title', 'body', 'date'];
     
     public function images()
     {

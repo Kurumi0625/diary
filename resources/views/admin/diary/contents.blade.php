@@ -22,13 +22,13 @@
                         <tbody>
                             @foreach($posts as $diary)
                                 <tr>
-                                    <th>{{ $diary->date }}</th>
+                                    <td>{{ $diary->date }}</td>
                                     <td>{{ str_limit($diary->title, 15) }}</td>
                                     <td>{{ str_limit($diary->body, 100) }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
-                    </table>
+                    </div>
                 </div>
             </div>
         </div>

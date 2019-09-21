@@ -5,6 +5,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Diary;
 use App\Image;
+use App\User;
+use App\Holiday;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 
@@ -24,20 +26,14 @@ class DiaryController extends Controller
         $form = $request->all();
         $form['user_id'] = auth()->user()->id;
         
-        /*if (isset($form['image'])) {
-        $path = $request->file('image')->store('public/image');
-        $diary->image_path = basename($path);
-      } else {
-          $diary->image_path = null;
-      }*/
-
-      unset($form['_token']);
-      //unset($form['image']);
+        $diary->fill($form);
+        $diary->save();
+        
+        $image = new Image;
+        $image->diary_id = $diary->id;
+        $image->image_path = $form['image_path'];
+        $image->save();
       
-
-      $diary->fill($form);
-      $diary->save();
-    
         return redirect('admin/diary/');
     }
     
@@ -52,13 +48,11 @@ class DiaryController extends Controller
                 ->orderByDesc('date')->paginate(10);
         } else {
             $posts = Diary::where('user_id', auth()->user()->id)->orderByDesc('date')->paginate(10);
-            //->get()->sortByDesc('date');
-            //$posts = Diary::paginate(5);
         }
+        
         return view('admin.diary.index', ['posts' => $posts, 'cond_keyword' => $cond_keyword]);
         
     }
-    
     public function edit(Request $request)
     {
         $diary = Diary::find($request->id);
@@ -100,17 +94,26 @@ class DiaryController extends Controller
     
     public function show(Request $request)
     {
-    $cond_keyword = $request->cond_keyword;
+        $cond_keyword = $request->cond_keyword;
         if ($cond_keyword != '') {
             $posts = Diary::where('user_id', auth()->user()->id)->where(function($query) use($cond_keyword){
                 $query->where('title', 'LIKE', "%$cond_keyword%")
                 ->orWhere('body', 'LIKE', "%$cond_keyword%");
                 })
-                ->get();
+                ->orderByDesc('date')->paginate(10);
         } else {
-            $posts = Diary::where('user_id', auth()->user()->id)->get()->sortByDesc('date');
+            $posts = Diary::where('user_id', auth()->user()->id)->orderByDesc('date')->paginate(10);
         }
+        
         return view('admin.diary.contents', ['posts' => $posts, 'cond_keyword' => $cond_keyword]);
+        //$posts = Diary::find($request->id);
+        //return view('admin.diary.contents',['posts'=>$posts, 'id'=>$id]);
+        
+        //
+        //$posts = Diary::all();
+        
+        //return view('admin.diary.contents', ['posts' => $posts]);
+        //return view('admin.diary.contents', ['post' => $post]);
     }
     
     public function uploadImage(Request $request)
@@ -124,6 +127,8 @@ class DiaryController extends Controller
     
     public function meEdit(Request $request)
     {
-        return view('admin.diary.me');
+     
+      return view('admin.diary.me');
     }
+    
 }

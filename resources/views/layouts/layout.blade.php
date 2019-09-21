@@ -11,8 +11,15 @@
         
         <!-- Scripts -->
         <script src="{{ secure_asset('js/app.js') }}" defer></script>
-        <script src="//cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+        <script src="//cdn.tiny.cloud/1/sj1d4hefnnh9u5cirf53a9412notkii9raju8siugyfbkx67/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
         <script>tinymce.init({selector:'textarea'});</script>
+        <script src='lib/jquery.min.js'></script>
+        <script src='lib/moment.min.js'></script>
+        <!-- カレンダーScripts -->
+        <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
+        <script src="https://g.0-oo.net/gcalendar-holidays.js"></script>
+        
         <!-- Fonts -->
         <link rel="dns-prefetch" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
@@ -20,6 +27,15 @@
         <!-- Styles -->
         <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
         <link href="{{ secure_asset('css/admin.css') }}" rel="stylesheet">
+        <link rel='stylesheet' href='fullcalendar/fullcalendar.css' />
+        <style>
+        .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, a.ui-button:active, .ui-button:active, .ui-button.ui-state-active:hover {
+            color: white !important;
+            background-color: rgb(0, 127, 255) !important;
+        }
+        </style>
+        <!-- カレンダーStyles -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css"/>
     </head>
     <body>
         <div id="app">

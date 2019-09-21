@@ -16,7 +16,7 @@
                     @endif
                     <div class="form-group row">
                         <div class="col-md-5">
-                            <input id="datepicker" type="text" class="form-control" name="date" value="{{ $diary_form->date }}">
+                            <input type="date" class="form-control" name="date" value="{{ $diary_form->date }}">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -33,8 +33,9 @@
                         <div class="col-md-10">
                             <input type="hidden" name="id" value="{{ $diary_form->id }}">
                             {{ csrf_field() }}
+                            <drop-image v-bind:name="'image_path'" v-bind:path="'{{ old('image_path', $diary_form->images != NULL ? $diary_form->images[0]->image_path : NULL) }}'"
+                            v-bind:url="'/api/admin/diary/uploadImage'" v-bind:dir="'upload_images/diary/{{ auth()->user()->id }}'"></drop-image>
                             <input type="submit" class="btn btn-primary" value="更新">
-                            
                         </div>
                     </div>
                 </form>

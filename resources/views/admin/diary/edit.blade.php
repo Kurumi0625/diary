@@ -4,7 +4,12 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-8 mx-auto">
+            <div class="col-md-2">
+                <a href="{{ action('Admin\DiaryController@index') }}" role="button" class="btn btn-primary">トップに戻る</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-10 mx-auto">
                 <form action="{{ action('Admin\DiaryController@update') }}" method="post" enctype="multipart/form-data">
                     
                     @if (count($errors) > 0)

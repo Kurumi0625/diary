@@ -67,15 +67,6 @@ class DiaryController extends Controller
         $this->validate($request, Diary::$rules);
         $diary = Diary::find($request->id);
         $diary_form = $request->all();
-        /* 要編集
-        if ($request->remove == 'true') {
-            $diary_form['image_path'] = null;
-        } elseif ($request->file('image')) {
-            $path = Storage::disk('s3')->putFile('/',$form['image'],'public');
-            $diary->image_path = Storage::disk('s3')->url($path);
-        } else {
-            $diary_form['image_path'] = $diary->image_path;
-        }*/
         
         unset($diary_form['_token']);
         //unset($diary_form['image']);
@@ -94,26 +85,25 @@ class DiaryController extends Controller
     
     public function show(Request $request)
     {
-        $cond_keyword = $request->cond_keyword;
-        if ($cond_keyword != '') {
-            $posts = Diary::where('user_id', auth()->user()->id)->where(function($query) use($cond_keyword){
-                $query->where('title', 'LIKE', "%$cond_keyword%")
-                ->orWhere('body', 'LIKE', "%$cond_keyword%");
-                })
-                ->orderByDesc('date')->paginate(10);
-        } else {
-            $posts = Diary::where('user_id', auth()->user()->id)->orderByDesc('date')->paginate(10);
-        }
-        
-        return view('admin.diary.contents', ['posts' => $posts, 'cond_keyword' => $cond_keyword]);
-        //$posts = Diary::find($request->id);
-        //return view('admin.diary.contents',['posts'=>$posts, 'id'=>$id]);
-        
-        //
-        //$posts = Diary::all();
-        
-        //return view('admin.diary.contents', ['posts' => $posts]);
-        //return view('admin.diary.contents', ['post' => $post]);
+          // 日記詳細
+          $diary = Diary::find($request->id);
+          // 日付
+          $date = $diary->date;
+          // 取得したい日付を配列
+          $post_dates = [];
+          for ($i=1; $i<5; $i++) {
+              $post_dates[] = Carbon::parse($date)->clone()->subYears($i)->format('Y-m-d');
+          }
+          
+          // 5年間の日記
+          // 条件：自分が書いた日記 かつ 同じ日付 かつ 5年前まで かつ 今表示している日記以外
+          $posts =
+              Diary::where('user_id', auth()->user()->id)
+                  ->whereIn('date', $post_dates)
+                  ->orderByDesc('date')
+                  ->get();
+
+          return view('admin.diary.contents', ['posts' => $posts, 'diary' => $diary]);
     }
     
     public function uploadImage(Request $request)
@@ -125,10 +115,5 @@ class DiaryController extends Controller
         return response()->json(['status' => 'ok', 'path' => Storage::url($path)]);
     }
     
-    public function meEdit(Request $request)
-    {
-     
-      return view('admin.diary.me');
-    }
     
 }

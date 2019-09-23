@@ -5,14 +5,20 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4">
-                
-                <a href="{{ action('Admin\DiaryController@meEdit') }}">{{ Auth::user()->name }}の日記</a>
+                <div class="diary-user-name">
+                    <h3>{{ Auth::user()->name }}の日記</h3>
+                </div>
+                <div class="diary-create">
+                    <a href="{{ action('Admin\DiaryController@add') }}" role="button" class="btn btn-info">日記を書く</a>
+                </div>
             </div>
             <div class="col-md-8">
                 <form action="{{ action('Admin\DiaryController@index') }}" method="get">
                     <div class="form-group row">
                         <div class="col-md-8">
+                            <div class="keyword">
                             <input type="text" class="form-control" name="cond_keyword" value="{{ $cond_keyword }}">
+                            </div>
                         </div>
                         <div class="col-md-2">
                             {{ csrf_field() }}
@@ -24,32 +30,28 @@
         </div>
         <div class="row">
             <div class="col-md-2">
-                <a href="{{ action('Admin\DiaryController@add') }}" role="button" class="btn btn-primary">日記を書く</a>
-                <label>※カレンダーを入れる</label>
                 
+                <button id="prev" type="button">前の月</button>
+                <button id="next" type="button">次の月</button>
+                <div id="calendar"></div>
             </div>
-            <div class="list-diary col-md-10 mx-auto">
+            <div class="list-diary col-md-8 mx-auto">
                 <div class="row">
-                    <table class="table">
+                    <table class="index-diary-table">
                         <tbody>
                             @foreach($posts as $diary)
                                 <tr>
-                                    <td width="20%">{{ $diary->date }}</td>
-                                    <td width="70%">
-                                        <div>
-                                            <a href="{{ action('Admin\DiaryController@show', ['id' => $diary->id]) }}">{{ str_limit($diary->title, 50) }}</a>
-                                            <br><a>{{ str_limit($diary->body, 80) }}</a>
-                                        </div>
-                                    </td>
-                                    <td width="10%">
-                                        <div>
-                                            <a href="{{ action('Admin\DiaryController@edit', ['id' => $diary->id]) }}">編集</a>
-                                        </div>
-                                        <div>
-                                            <a href="{{ action('Admin\DiaryController@delete', ['id' => $diary->id]) }}" onclick='return confirm("削除してもよろしいですか？");'/>削除</a>
-                                        </div>
-                                    </td>
+                                    <td width="90%" class="index-diary-title"><a href="{{ action('Admin\DiaryController@show', ['id' => $diary->id]) }}">■{!! str_limit($diary->title, 65) !!}</a></td>
+                                    <td width="10%"><a href="{{ action('Admin\DiaryController@edit', ['id' => $diary->id]) }}">編集</a></td>
                                 </tr>
+                                <tr>
+                                    <th width="90%">{{ $diary->date }}</th>
+                                    <td width="10%"><a href="{{ action('Admin\DiaryController@delete', ['id' => $diary->id]) }}" onclick='return confirm("削除してもよろしいですか？");'/>削除</a></td>
+                                </tr>
+                                <tr>
+                                    <td class="index-diary-body" width="10%">{!! str_limit($diary->body, 400) !!}</td>
+                                </tr>
+                                    
                             @endforeach
                         </tbody>
                     </table>

@@ -1,3 +1,5 @@
+@charset "UTF-8";
+
 body {
   background-repeat: no-repeat;
   background-position: center;
@@ -37,5 +39,85 @@ body {
 
 .login-body {
   background-color: rgba(0, 0, 0, 0.25);
+}
+
+.btn {
+  margin: 15px 0px 35px 0px;
+}
+
+.create-button .btn {
+  margin-bottom: 30px;
+  text-align: left;
+}
+
+.keyword .form-control {
+  margin: 15px 0px 35px 0px;
+}
+
+.diary-user-name h3 {
+  color: gray;
+}
+
+.index-diary-table .index-diary-title {
+  font-size: 20px;
+  border: 2px solid #EEEEEE;
+  border-bottom-style: none;
+  border-left-style: none;
+  border-right-style: none;
+}
+
+.index-diary-table .index-diary-body {
+  font-size: 14px;
+}
+
+.detail-diary .detail-diary-title {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.detail-diary .detail-diary-date {
+  font-weight: bold;
+}
+
+.detail-diary .detail-diary-body {
+  border: solid 3px #EEEEEE;
+}
+
+/* カレンダー */
+
+#calendar {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#calendar section {
+  margin-top: 20px;
+}
+
+#calendar h1 {
+  font-size: 18px;
+}
+
+#calendar table {
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+#calendar td {
+  border: 1px solid #ddd;
+  padding: 5px;
+  text-align: center;
+}
+
+#calendar td:first-child {
+  color: red;
+}
+
+#calendar td:last-child {
+  color: royalblue;
+}
+
+#calendar td.is-disabled {
+  color: #ccc;
 }
 

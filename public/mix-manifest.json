@@ -1,8 +1,5 @@
 {
-    "/js/1.12.1.jquery-ui.js": "/js/1.12.1.jquery-ui.js",
     "/js/app.js": "/js/app.js",
     "/css/admin.css": "/css/admin.css",
-    "/js/gcalendar-holidays.js": "/js/gcalendar-holidays.js",
-    "/js/jquery-3.2.1.min.js": "/js/jquery-3.2.1.min.js",
     "/js/tinymce.min.js": "/js/tinymce.min.js"
 }

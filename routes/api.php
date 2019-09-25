@@ -18,5 +18,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::group(['prefix' => 'admin'], function() {
-   Route::post('diary/uploadImage', 'Admin\DiaryController@uploadImage'); 
+    Route::post('diary/uploadImage', 'Admin\DiaryController@uploadImage');
+    Route::post('diary/getDiaries', 'Admin\DiaryController@getDiaries');
 });

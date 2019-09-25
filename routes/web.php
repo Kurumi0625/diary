@@ -27,6 +27,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
     Route::post('diary/edit', 'Admin\DiaryController@update');
     Route::get('diary/delete', 'Admin\DiaryController@delete');
    Route::get('diary/contents', 'Admin\DiaryController@show'); 
+   Route::post('diary/getDiaries', 'Admin\DiaryController@getDiaries');
 });
 
 //ログイン後トップページ

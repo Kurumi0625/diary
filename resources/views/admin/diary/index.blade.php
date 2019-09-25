@@ -30,7 +30,6 @@
         </div>
         <div class="row">
             <div class="col-md-2">
-                
                 <button id="prev" type="button">前の月</button>
                 <button id="next" type="button">次の月</button>
                 <div id="calendar"></div>
@@ -51,7 +50,8 @@
                                 <tr>
                                     <td class="index-diary-body" width="10%">{!! str_limit($diary->body, 400) !!}</td>
                                 </tr>
-                                    
+                                <tr>
+                                </tr>
                             @endforeach
                         </tbody>
                     </table>

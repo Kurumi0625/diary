@@ -67,10 +67,6 @@ class DiaryController extends Controller
         $this->validate($request, Diary::$rules);
         $diary = Diary::find($request->id);
         $diary_form = $request->all();
-        
-        unset($diary_form['_token']);
-        //unset($diary_form['image']);
-        unset($diary_form['remove']);
         $diary->fill($diary_form)->save();
         
         return redirect('admin/diary/');
@@ -115,5 +111,11 @@ class DiaryController extends Controller
         return response()->json(['status' => 'ok', 'path' => Storage::url($path)]);
     }
     
+    public function getDiaries(Request $request) {
+          $year = $request->get('year');
+          $month = $request->get('month');
+          $diaries = Diary::whereYear('date', '=', $year)->whereMonth('date', '=', $month)->get();
+          return response()->json(['status' => 'ok', 'diaries' => $diaries]);
+  }
     
 }

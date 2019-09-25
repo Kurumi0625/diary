@@ -11,19 +11,10 @@
         
         <!-- Scripts -->
         <script src="{{ secure_asset('js/app.js') }}" defer></script>
-        <script src="//cdn.tiny.cloud/1/sj1d4hefnnh9u5cirf53a9412notkii9raju8siugyfbkx67/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-        <script>tinymce.init({selector:'textarea'});</script>
-        <!-- カレンダーScripts -->
-        
-        <!-- Fonts -->
-        <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
         
         <!-- Styles -->
         <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
         <link href="{{ secure_asset('css/admin.css') }}" rel="stylesheet">
-        
-        <!-- カレンダーStyles -->
         
     </head>
     <body>
@@ -79,5 +70,11 @@
         </main>
         </div>
         <script src="{{ secure_asset('js/calendar.js') }}"></script>
+        <textarea id="editor" name="name" rows="8" cols="40"></textarea>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+        <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+        <script>
+            var simplemde = new SimpleMDE({ element: document.getElementById("editor") });
+            </script>
     </body>
 </html>

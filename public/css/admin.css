@@ -58,16 +58,25 @@ body {
   color: gray;
 }
 
+.index-diary-table {
+  color: #555555;
+  line-height: 3;
+}
+
 .index-diary-table .index-diary-title {
   font-size: 20px;
-  border: 2px solid #EEEEEE;
-  border-bottom-style: none;
-  border-left-style: none;
-  border-right-style: none;
 }
 
 .index-diary-table .index-diary-body {
   font-size: 14px;
+  border: 1px solid #D9E5FF;
+  border-top-style: none;
+  border-left-style: none;
+  border-right-style: none;
+}
+
+.detail-diary {
+  color: #555555;
 }
 
 .detail-diary .detail-diary-title {
@@ -77,10 +86,31 @@ body {
 
 .detail-diary .detail-diary-date {
   font-weight: bold;
+  font-size: 17px;
 }
 
 .detail-diary .detail-diary-body {
-  border: solid 3px #EEEEEE;
+  font-size: 15px;
+  line-height: 3;
+}
+
+.past-diary {
+  color: #555555;
+}
+
+.past-diary .past-diary-title {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.past-diary .past-diary-date {
+  font-weight: bold;
+  font-size: 17px;
+}
+
+.past-diary .past-diary-body {
+  line-height: 3;
+  font-size: 15px;
 }
 
 /* カレンダー */
@@ -119,5 +149,10 @@ body {
 
 #calendar td.is-disabled {
   color: #ccc;
+}
+
+#calendar .calendar_td.diary {
+  background: #E0FFFF;
+  cursor: pointer;
 }
 

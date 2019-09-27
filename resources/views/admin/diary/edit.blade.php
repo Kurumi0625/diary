@@ -39,6 +39,7 @@
                             <input type="hidden" name="id" value="{{ $diary_form->id }}">
                             {{ csrf_field() }}
                             <drop-image v-bind:name="'image_path'" v-bind:path="'{{ old('image_path', count($diary_form->images) != 0 ? $diary_form->images[0]->image_path : NULL) }}'"
+                            v-bind:image_id="'{{ old('image_path', count($diary_form->images) != 0 ? $diary_form->images[0]->id : NULL) }}'"
                             v-bind:url="'/api/admin/diary/uploadImage'" v-bind:dir="'upload_images/diary/{{ auth()->user()->id }}'"></drop-image>
                             <input type="submit" class="btn btn-primary" value="更新">
                         </div>

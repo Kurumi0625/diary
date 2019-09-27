@@ -13,7 +13,7 @@
               <div class="detail-diary">
                   <p class="detail-diary-title">{{ $diary->title }}</p>
                   <p class="detail-diary-date">{{ $diary->date }}</p>
-                  <p class="detail-diary-body">{!! $diary->body !!}</p>
+                  <p class="detail-diary-body">{!! nl2br(e($diary->body)) !!}</p>
                   @foreach ($diary->images as $image)
                     <img src="{{ $image->image_path }}" width="200" />
                   @endforeach
@@ -30,7 +30,7 @@
                               @foreach($posts as $diary)
                                   <p class="past-diary-title">{{ $diary->title }}</p>
                                   <p class="past-diary-date">{{ $diary->date }}</p>
-                                  <p class="past-diary-body">{!! $diary->body !!}</p>
+                                  <p class="past-diary-body">{!! nl2br(e($diary->body)) !!}</p>
                                   <hr style="width:100%; height:1px; background-color:#D9E5FF;">
                               @endforeach
                       </div>

@@ -70,11 +70,5 @@
         </main>
         </div>
         <script src="{{ secure_asset('js/calendar.js') }}"></script>
-        <textarea id="editor" name="name" rows="8" cols="40"></textarea>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
-        <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
-        <script>
-            var simplemde = new SimpleMDE({ element: document.getElementById("editor") });
-            </script>
     </body>
 </html>

@@ -1726,9 +1726,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "DropImage",
-  props: ['name', 'path', 'url', 'dir'],
+  props: ['name', 'path', 'url', 'dir', 'image_id'],
   data: function data() {
     return {
       'host': '',
@@ -1737,6 +1740,7 @@ __webpack_require__.r(__webpack_exports__);
       'imgData': null,
       'isDrag': null,
       'uploaded': false,
+      'deletedIds': [],
       'emptyImage': 'data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAAiQAAAD6CAMAAACmhqw0AAAA+VBMVEUAAAD29u3u7unt7ent7enu7uju7uihoqCio6Gio6KjpKOkpaSmpqSmp6WoqKaqq6mqq6qrq6qsrautrauur62wsa6xsa+xsrCys7GztLK0tbK1trS2t7S3t7W4uba5ure6u7e7vLm8vbu9vrvAwL3Awb3DxMHFxcPGxsPHx8TIycXLzMjLzMnMzMnNzsrPz8vP0MzQ0M3S0s/U1NDV1dLX19TY2NTY2NXZ2dba2tXb29bc3Nfc3Njc3dnd3dre3tre39vg4Nvh4dzi4t3i4t7j497k5N/k5ODl5eDl5eHl5uLm5uHn5+Lo6OPp6eTq6uXr6+bs7Oft7eh54KxIAAAAB3RSTlMAHKbl5uztvql9swAABA1JREFUeNrt3VlT01AYgOG0oEEE910URNzFBVFcqCgKirLU/P8fI3QYbEOSdtrMyJzzvHfMlFx833NBQuY0SRrN8UwqabzZSJLGaYNQVacaSdMUVF0zGTMEVTeWmIH6BYkgESSCRJAIEkEiSCRIBIkgESSCRJAIEkEiQSJIBIkgESSCRJAIEgkSQSJIBIkgESSCRJBIkAgSQSJIBIkgESSCRIJEkAgSQSJIBIkgkSARJIJEkAgSQSJIBIkEiSARJIJEkAgSQSJIJEgEiSARJIJEkAgSQSJBIkgEiSARJIJEkAgSCRJBIkgEiSARJIJEgkSQ5PvxbdS+tyEJuZVb0+noTV579geSQGs/SOvqxiYkYfYwra+rbUhC7NNEjUjSJ5CE2P06jaTnIAmxKwe7vb468t3N14WOki1IAuzMwWrf1HCh3Q6S95AEWGe1b0/WlSCBBBJIIAkdSXvt1aNXa21IICld7dJU5+epJUggKV7tzuzRA4/ZHUggKVrtfNdjsXlIIClY7XLPw9NlSCA5vtqLPUguQgLJsdX+zv0fZhsSSPKrXckhWSn5jV8zG5DEiuR1DsnrEiOX0vMbkESKZDWHZLXMSFqsBJIIkOz1vn40sVdqpFgJJDHc3dzsQXKzwkihEkhiQLI+2f3y+3qVkSIlkMSAJFvsQrJYbaRACSRRIMlenj0UcPZlPyPHlUASB5Jsc+7cwevMc5v9jRxTAkkkSPbb+riVZYMYySuBJB4kJRUYySmBJHYkhUZ6lUASOZISIz1KIIkbSamRbiWQxIZkvT2YkS4lkESGpDV9tz2YkX9KIIkLSWs6TY+U9DFypASSqJC0OicfHSrpa2T/k5BEh6R1eDpWR8kARtIZSGJD0jo6QW1fySBGIIkOSavrlL27PwcxAklsSFo9JzFOppBAkl9ta5jTOiGJCslQRiCJCslwRiCJCcmQRiCJCMmwRiCJB8mXoU+YhyQaJM9TSCCBBBJIIIEEEkgggQQSSCCJAsnyzLA9hiQWJCfnSpBAAgkkkATXxFCnPxfU7iB5B0mAXT5Y7Z3t0Y087SDZgCTA7tX6bZ5TGSQBtlwrkgVIgmy+RiMXdiEJsp3b9Rn5nEESaC/O1/P3yMJuBkm4bX94O2rvNiKbWXRIBIkgESSCRJAIEkEiQSJIBIkgESSCRJAIEgkSQSJIBIkgESSCRIJEkAgSQSJIBIkgESQSJIJEkAgSQSJIBIkgkSARJIJEkAgSQSJIBIkEiSARJIJEkAgSQSJIJEgEiSARJIJEkAgSCRJBIkgEiSARJIJEkEiQCBJBIkgEiSARJIJEgkSQCBJBIkgEiSARJBIkgkSQ6P8gGTMDVTeWNA1B1TWTxmlTUFWnGknSaI4bhMoabzaSv+4BHFVoHZzfAAAAAElFTkSuQmCC'
     };
   },
@@ -1795,9 +1799,10 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
     },
-    onDelete: function onDelete(event) {
+    onDelete: function onDelete(image_id) {
       this.imgData = null;
       this.uploaded = false;
+      this.deletedIds.push(image_id);
     }
   }
 });
@@ -37776,88 +37781,108 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "file-area" }, [
-    !_vm.uploaded
-      ? _c(
-          "div",
-          {
-            staticClass: "drop-area",
-            class: [{ drag: _vm.isDrag == "new" }],
-            on: {
-              dragover: function($event) {
-                $event.preventDefault()
-                return _vm.checkDrag($event, "new", true)
-              },
-              dragleave: function($event) {
-                $event.preventDefault()
-                return _vm.checkDrag($event, "new", false)
-              },
-              drop: function($event) {
-                $event.preventDefault()
-                return _vm.onDrop($event)
+  return _c(
+    "div",
+    { staticClass: "file-area" },
+    [
+      !_vm.uploaded
+        ? _c(
+            "div",
+            {
+              staticClass: "drop-area",
+              class: [{ drag: _vm.isDrag == "new" }],
+              on: {
+                dragover: function($event) {
+                  $event.preventDefault()
+                  return _vm.checkDrag($event, "new", true)
+                },
+                dragleave: function($event) {
+                  $event.preventDefault()
+                  return _vm.checkDrag($event, "new", false)
+                },
+                drop: function($event) {
+                  $event.preventDefault()
+                  return _vm.onDrop($event)
+                }
               }
-            }
-          },
-          [
-            _c("i", {
-              staticClass: "fa fa-plus",
-              attrs: { "aria-hidden": "true" }
-            }),
-            _vm._v(" "),
-            _c("div", { staticClass: "drop" }, [
-              _c("p", { staticClass: "drag-drop-info" }, [
-                _vm._v("ここにファイルをドロップ")
-              ]),
+            },
+            [
+              _c("i", {
+                staticClass: "fa fa-plus",
+                attrs: { "aria-hidden": "true" }
+              }),
               _vm._v(" "),
-              _c("p", [_vm._v("または")]),
-              _vm._v(" "),
-              _c("label", { staticClass: "btn btn-success" }, [
-                _vm._v("\n                ファイルを選択\n                "),
-                _c("input", {
-                  staticClass: "drop__input",
-                  staticStyle: { display: "none" },
-                  attrs: { type: "file" },
-                  on: { change: _vm.onDrop }
-                })
+              _c("div", { staticClass: "drop" }, [
+                _c("p", { staticClass: "drag-drop-info" }, [
+                  _vm._v("ここにファイルをドロップ")
+                ]),
+                _vm._v(" "),
+                _c("p", [_vm._v("または")]),
+                _vm._v(" "),
+                _c("label", { staticClass: "btn btn-success" }, [
+                  _vm._v("\n                ファイルを選択\n                "),
+                  _c("input", {
+                    staticClass: "drop__input",
+                    staticStyle: { display: "none" },
+                    attrs: { type: "file" },
+                    on: { change: _vm.onDrop }
+                  })
+                ])
               ])
-            ])
-          ]
-        )
-      : _vm._e(),
-    _vm._v(" "),
-    _c("br"),
-    _vm._v(" "),
-    _c("input", {
-      attrs: { type: "hidden", name: _vm.name },
-      domProps: { value: _vm.imgData }
-    }),
-    _vm._v(" "),
-    _c("div", [
-      _vm.imgData
-        ? _c("img", {
-            staticClass: "preview",
-            attrs: { src: _vm.pdfFlg ? _vm.emptyImage : _vm.imgData }
-          })
+            ]
+          )
         : _vm._e(),
       _vm._v(" "),
-      _vm.imgData
-        ? _c(
-            "a",
-            {
-              staticClass: "btn btn-danger delete-btn",
-              on: { click: _vm.onDelete }
-            },
-            [_vm._v("削除する")]
-          )
-        : _vm._e()
-    ]),
-    _vm._v(" "),
-    _vm.msg
-      ? _c("div", [
-          _c("span", { staticClass: "text-danger" }, [_vm._v(_vm._s(_vm.msg))])
+      _c("br"),
+      _vm._v(" "),
+      _c("input", {
+        attrs: { type: "hidden", name: _vm.name },
+        domProps: { value: _vm.imgData }
+      }),
+      _vm._v(" "),
+      _c("div", [
+        _vm.imgData
+          ? _c("img", {
+              staticClass: "preview",
+              attrs: { src: _vm.pdfFlg ? _vm.emptyImage : _vm.imgData }
+            })
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.imgData
+          ? _c(
+              "a",
+              {
+                staticClass: "btn btn-danger delete-btn",
+                on: {
+                  click: function($event) {
+                    return _vm.onDelete(_vm.image_id)
+                  }
+                }
+              },
+              [_vm._v("削除する")]
+            )
+          : _vm._e()
+      ]),
+      _vm._v(" "),
+      _vm.msg
+        ? _c("div", [
+            _c("span", { staticClass: "text-danger" }, [
+              _vm._v(_vm._s(_vm.msg))
+            ])
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm._l(_vm.deletedIds, function(deletedId) {
+        return _c("div", [
+          _c("input", {
+            attrs: { type: "hidden", name: "deletedIds[]" },
+            domProps: { value: deletedId }
+          })
         ])
-      : _vm._e()
-  ])
+      })
+    ],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

@@ -69,6 +69,11 @@ class DiaryController extends Controller
         $diary_form = $request->all();
         $diary->fill($diary_form)->save();
         
+        $image = new Image;
+        $image->diary_id = $diary->id;
+        $image->image_path = $diary_form['image_path'];
+        $image->save();
+        
         return redirect('admin/diary/');
     }
     

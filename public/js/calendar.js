@@ -126,7 +126,7 @@ const weeks = ['日', '月', '火', '水', '木', '金', '土']
       if (e.target.classList.contains("calendar_td")) {
           if (e.target.dataset.id !== 'null') {
               // ページ遷移
-              document.location.href = '/admin/diary/contents/' + e.target.dataset.id;
+              document.location.href = '/admin/diary/contents?id=' + e.target.dataset.id;
           }
       }
       if (e.target.id === 'prev') {

@@ -61,6 +61,7 @@ body {
 .index-diary-table {
   color: #555555;
   line-height: 3;
+  width: 100%;
 }
 
 .index-diary-table .index-diary-title {

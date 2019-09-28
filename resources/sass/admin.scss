@@ -62,9 +62,11 @@ body {
   }
 }
 
+//トップページ記事
 .index-diary-table {
   color: #555555;
   line-height: 3;
+  width: 100%;
   .index-diary-title {
     font-size: 20px;
     
@@ -79,6 +81,7 @@ body {
   }
 }
 
+//５年表示ページ【当日】
 .detail-diary {
   color: #555555;
   .detail-diary-title {
@@ -95,6 +98,7 @@ body {
   }
 }
 
+//５年表示ページ【過去４年分】
 .past-diary {
   color: #555555;
   .past-diary-title {

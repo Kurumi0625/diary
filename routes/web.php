@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('admin/diary/');
 });
 
 Auth::routes();
@@ -26,9 +26,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
     Route::get('diary/edit', 'Admin\DiaryController@edit');
     Route::post('diary/edit', 'Admin\DiaryController@update');
     Route::get('diary/delete', 'Admin\DiaryController@delete');
-   Route::get('diary/contents', 'Admin\DiaryController@show'); 
-   Route::post('diary/getDiaries', 'Admin\DiaryController@getDiaries');
+    Route::get('diary/contents', 'Admin\DiaryController@show');
+    Route::post('diary/getDiaries', 'Admin\DiaryController@getDiaries');
 });
-
-//ログイン後トップページ
-//Route::get('/', 'DiaryController@index');

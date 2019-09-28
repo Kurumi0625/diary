@@ -13,11 +13,13 @@ use Illuminate\Support\Facades\Storage;
 
 class DiaryController extends Controller
 {
+    //「日記を書く」へ
     public function add()
     {
         return view('admin.diary.create');
     }
     
+    //「日記を書く」ページ
     public function create(Request $request)
     {
         $this->validate($request, Diary::$rules);
@@ -29,14 +31,17 @@ class DiaryController extends Controller
         $diary->fill($form);
         $diary->save();
         
-        $image = new Image;
-        $image->diary_id = $diary->id;
-        $image->image_path = $form['image_path'];
-        $image->save();
+        if (!empty($form['image_path'])) {
+            $image = new Image;
+            $image->diary_id = $diary->id;
+            $image->image_path = $form['image_path'];
+            $image->save();
+        }
       
         return redirect('admin/diary/');
     }
     
+    //トップページ、曖昧検索
     public function index(Request $request)
     {
         $cond_keyword = $request->cond_keyword;
@@ -53,6 +58,8 @@ class DiaryController extends Controller
         return view('admin.diary.index', ['posts' => $posts, 'cond_keyword' => $cond_keyword]);
         
     }
+    
+    //「編集」へ
     public function edit(Request $request)
     {
         $diary = Diary::find($request->id);
@@ -62,21 +69,35 @@ class DiaryController extends Controller
         return view('admin.diary.edit', ['diary_form' => $diary]);
     }
     
+    //日記・画像アップ
     public function update(Request $request)
     {
         $this->validate($request, Diary::$rules);
         $diary = Diary::find($request->id);
         $diary_form = $request->all();
         $diary->fill($diary_form)->save();
-        
-        $image = new Image;
-        $image->diary_id = $diary->id;
-        $image->image_path = $diary_form['image_path'];
-        $image->save();
-        
+
+        // 🌟 画像
+        // 削除されたIDがあれば、Imageテーブルから削除
+        if (!empty($request->deletedIds)) {
+            foreach ($request->deletedIds as $deletedId) {
+                $image = Image::find($deletedId);
+                $image->delete();
+            }
+        }
+
+        // image_pathにデータがあれば、Imageテーブルに新規登録
+        if (!empty($diary_form['image_path'])) {
+            $image = new Image;
+            $image->diary_id = $diary->id;
+            $image->image_path = $diary_form['image_path'];
+            $image->save();
+        }
+
         return redirect('admin/diary/');
     }
     
+    //削除
     public function delete(Request $request)
     {
         $diary = Diary::find($request->id);
@@ -84,9 +105,10 @@ class DiaryController extends Controller
         return redirect('admin/diary/');
     }
     
+    //5年日記表示
     public function show(Request $request)
     {
-          // 日記詳細
+          // 当日日記詳細
           $diary = Diary::find($request->id);
           // 日付
           $date = $diary->date;

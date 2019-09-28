@@ -69,6 +69,7 @@
             @yield('content')
         </main>
         </div>
+        <!-- カレンダーScript -->
         <script src="{{ secure_asset('js/calendar.js') }}"></script>
     </body>
 </html>

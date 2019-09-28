@@ -11,6 +11,7 @@
                 <div class="diary-create">
                     <a href="{{ action('Admin\DiaryController@add') }}" role="button" class="btn btn-info">日記を書く</a>
                 </div>
+            <!-- 曖昧検索 -->
             </div>
             <div class="col-md-8">
                 <form action="{{ action('Admin\DiaryController@index') }}" method="get">
@@ -27,13 +28,17 @@
                     </div>
                 </form>
             </div>
+            <!-- /曖昧検索 -->
         </div>
         <div class="row">
+            <!-- アーカイブカレンダー -->
             <div class="col-md-2">
                 <button id="prev" type="button">前の月</button>
                 <button id="next" type="button">次の月</button>
                 <div id="calendar"></div>
             </div>
+            <!-- /アーカイブカレンダー -->
+            <!-- 投稿日記一覧新着順 -->
             <div class="list-diary col-md-8 mx-auto">
                 <div class="row">
                     <table class="index-diary-table">
@@ -58,6 +63,7 @@
                     {{ $posts->links() }}
                 </div>
             </div>
+            <!-- /投稿日記一覧新着順 -->
         </div>
     </div>
 @endsection

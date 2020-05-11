@@ -27,7 +27,7 @@
         "@fullcalendar/core": "^4.3.1",
         "@fullcalendar/daygrid": "^4.3.0",
         "flatpickr": "^4.6.2",
-        "tinymce": "^5.0.15",
+        "tinymce": "^5.2.2",
         "trumbowyg": "^2.19.1"
     }
 }
